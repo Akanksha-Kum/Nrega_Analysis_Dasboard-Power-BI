@@ -1,0 +1,52 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Data extracted from the PDF
+data = {
+    'Total Districts': 736,
+    'Total Job Cards Issued': 156_000_000,
+    'Total States': 34,
+    'Budget Approved (in USD)': 2_000_000_000,
+    'Total Workers': 269_000_000,
+    'Total Individuals': 63_000_000,
+    'Total Households': 46_000_000,
+    'Ongoing Works': 13_000_000,
+    'Completed Works': 4_000_000,
+    'Differently Abled Workers': 396_000,
+    'Households Completed 100 Days of Employment': 428_000,
+    'Average Wage Rate per Day per Person (in Rs)': 408.55,
+    'Average Days of Employment per Household': 46
+}
+
+states_data = {
+    'State': ['West Bengal', 'Rajasthan', 'Uttar Pradesh', 'Madhya Pradesh', 'Tamil Nadu', 'Bihar', 'Karnataka', 'Andhra Pradesh', 'Maharashtra', 'Odisha'],
+    'Active Workers': [18_000_000, 18_000_000, 17_000_000, 13_000_000, 11_000_000, 11_000_000, 11_000_000, 10_000_000, 9_000_000, 8_000_000],
+    'Total Workers': [26_000_000, 23_000_000, 24_000_000, 18_000_000, 13_000_000, 23_000_000, 18_000_000, 28_000_000, 10_000_000, 23_000_000],
+    'Job Cards Issued': [30_000_000, 26_000_000, 23_000_000, 20_000_000, 17_000_000, 17_000_000, 16_000_000, 13_000_000, 12_000_000, 11_000_000],
+    'Approved Budget (in USD)': [0.22, 0.21, 0.20, 0.20, 0.20, 0.17, 0.15, 0.13, 0.10, 0.09],
+}
+
+# Convert the data to DataFrame
+df_states = pd.DataFrame(states_data)
+
+# Function to generate and display bar charts
+def plot_bar_chart(df, x_col, y_col, title, xlabel, ylabel):
+    plt.figure(figsize=(10, 6))
+    plt.bar(df[x_col], df[y_col], color='skyblue')
+    plt.xlabel(xlabel)
+    plt.ylabel(ylabel)
+    plt.title(title)
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+
+# Plotting the data
+plot_bar_chart(df_states, 'State', 'Active Workers', 'Active Workers by State', 'State', 'Number of Active Workers')
+plot_bar_chart(df_states, 'State', 'Total Workers', 'Total Workers by State', 'State', 'Number of Total Workers')
+plot_bar_chart(df_states, 'State', 'Job Cards Issued', 'Job Cards Issued by State', 'State', 'Number of Job Cards Issued')
+plot_bar_chart(df_states, 'State', 'Approved Budget (in USD)', 'Approved Budget by State', 'State', 'Approved Budget (in USD)')
+
+# Display the extracted data
+print("Summary of Employment Report:")
+for key, value in data.items():
+    print(f"{key}: {value}")
